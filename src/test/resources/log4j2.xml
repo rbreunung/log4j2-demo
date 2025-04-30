@@ -32,15 +32,18 @@
             &quot;$resolver&quot;: &quot;exception&quot;, &quot;field&quot;: &quot;stackTrace&quot;,
             &quot;stackTrace&quot;: { &quot;stringified&quot;: true } }}" />-->
         </File>
-        <Http name="HttpAppender" url="http://127.0.0.1:8088/services/collector/event">
-            <JsonTemplateLayout  eventTemplateUri="file://${app.home}/src/test/resources/template.json" />
-            <Property name="Authorization" value="Splunk 041ab08b-5b9b-4b56-ae0a-0e710d43ee71" />
+        <Http name="HttpAppender" url="http://127.0.0.1:8088/services/collector">
+
+            <JsonTemplateLayout eventTemplateUri="file://${app.home}/src/test/resources/template.json" />
+            <Property name="Authorization" value="Splunk <token>" />
+            <Property name="Content-Type" value="application/json" />
         </Http>
     </Appenders>
     <Loggers>
         <Root level="INFO">
             <AppenderRef ref="MyCustomAppender" />
             <AppenderRef ref="file-test" />
+            <AppenderRef ref="HttpAppender" />
         </Root>
     </Loggers>
 </Configuration>

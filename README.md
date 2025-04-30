@@ -33,6 +33,8 @@ docker run -d -p 8000:8000 -p 8088:8088 -e "SPLUNK_START_ARGS=--accept-license" 
 - both log4j2.xml files do not get merged automatically
 - root logger level is the initial setup for all name spaces
 - static loggers may only be reached by an xml configuration or else must be set by a Powermock override.
+- http collector on Splunk with port 8088 uses https by default. I needed to disable it, to get my POC running.
+- The template needed to be reworked. The HEC format required a event key as a wrapping element.
 
 ## Notes
 
