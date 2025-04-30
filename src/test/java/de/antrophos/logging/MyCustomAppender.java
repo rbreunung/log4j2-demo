@@ -1,6 +1,7 @@
 package de.antrophos.logging;
 
 import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.Core;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
@@ -14,7 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Plugin(name = "MyCustomAppender", category = "Core", elementType = Appender.ELEMENT_TYPE, printObject = true)
+@Plugin(name = "MyCustomAppender", category = Core.CATEGORY_NAME, elementType = Appender.ELEMENT_TYPE, printObject = true)
 public class MyCustomAppender extends AbstractAppender {
 
     private final List<String> logMessages = new ArrayList<>();

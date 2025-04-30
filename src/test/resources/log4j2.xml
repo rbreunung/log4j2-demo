@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="ERROR" xmlns="https://logging.apache.org/xml/ns"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-config-2.xsd">
+    <Properties>
+        <Property name="app.home" value="${env:APP_HOME:-/D:/Dev/ASL/log4j-demo}" />
+    </Properties>
     <Appenders>
         <MyCustomAppender name="MyCustomAppender">
             <PatternLayout pattern="%m%n"/>
         </MyCustomAppender>
+        <File name="file-test" fileName="out-test.log">
+            <!-- eventTemplate="{ 'timestamp': { '$resolver': 'timestamp', 'pattern': { 'format':
+            'yyyy-MM-dd'T'HH:mm:ss.SSSXXX', 'timeZone': 'America/New_York' } }, 'message': {
+            '$resolver': 'message' }}" -->
+            <JsonTemplateLayout  eventTemplateUri="file://${app.home}/src/test/resources/template.json" />
+            <!-- <PatternLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p [%c{1}] %m%n" /> -->
+            <!-- <PatternLayout pattern="%d{ISO8601_OFFSET_DATE_TIME_HHMM} %-5p [%c{2}] %m%n" /> -->
+            <!--<JsonTemplateLayout
+                eventTemplate="{ &quot;timestamp&quot;: { &quot;$resolver&quot;: &quot;timestamp&quot; },
+            &quot;ecs.version&quot;: &quot;1.2.0&quot;, &quot;log.level&quot;: {
+            &quot;$resolver&quot;: &quot;level&quot;, &quot;field&quot;: &quot;name&quot; },
+            &quot;message&quot;: { &quot;$resolver&quot;: &quot;message&quot;,
+            &quot;stringified&quot;: true }, &quot;process.thread.name&quot;: {
+            &quot;$resolver&quot;: &quot;thread&quot;, &quot;field&quot;: &quot;name&quot; },
+            &quot;log.logger&quot;: { &quot;$resolver&quot;: &quot;logger&quot;, &quot;field&quot;:
+            &quot;name&quot; }, &quot;labels&quot;: { &quot;$resolver&quot;: &quot;mdc&quot;,
+            &quot;flatten&quot;: true, &quot;stringified&quot;: true }, &quot;tags&quot;: {
+            &quot;$resolver&quot;: &quot;ndc&quot; }, &quot;error.type&quot;: {
+            &quot;$resolver&quot;: &quot;exception&quot;, &quot;field&quot;: &quot;className&quot;
+            }, &quot;error.message&quot;: { &quot;$resolver&quot;: &quot;exception&quot;,
+            &quot;field&quot;: &quot;message&quot; }, &quot;error.stack_trace&quot;: {
+            &quot;$resolver&quot;: &quot;exception&quot;, &quot;field&quot;: &quot;stackTrace&quot;,
+            &quot;stackTrace&quot;: { &quot;stringified&quot;: true } }}" />-->
+        </File>
     </Appenders>
     <Loggers>
         <Root level="INFO">
-            <AppenderRef ref="MyCustomAppender"/>
+            <AppenderRef ref="MyCustomAppender" />
+            <AppenderRef ref="file-test" />
         </Root>
     </Loggers>
 </Configuration>
