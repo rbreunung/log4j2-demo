@@ -2,7 +2,7 @@
 <Configuration status="ERROR" xmlns="https://logging.apache.org/xml/ns"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-config-2.xsd">
     <Properties>
-        <Property name="app.home" value="${env:APP_HOME:-/D:/Dev/ASL/log4j-demo}" />
+        <Property name="app.home" value="${env:APP_HOME:-/C:/Users/antrophos/git/log4j2-demo}" />
     </Properties>
     <Appenders>
         <MyCustomAppender name="MyCustomAppender">
@@ -32,6 +32,10 @@
             &quot;$resolver&quot;: &quot;exception&quot;, &quot;field&quot;: &quot;stackTrace&quot;,
             &quot;stackTrace&quot;: { &quot;stringified&quot;: true } }}" />-->
         </File>
+        <Http name="HttpAppender" url="http://127.0.0.1:8088/services/collector/event">
+            <JsonTemplateLayout  eventTemplateUri="file://${app.home}/src/test/resources/template.json" />
+            <Property name="Authorization" value="Splunk 041ab08b-5b9b-4b56-ae0a-0e710d43ee71" />
+        </Http>
     </Appenders>
     <Loggers>
         <Root level="INFO">

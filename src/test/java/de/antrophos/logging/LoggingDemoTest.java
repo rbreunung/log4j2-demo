@@ -31,7 +31,7 @@ public class LoggingDemoTest {
         LoggingDemo.main(null);
 
         List<String> logMessages = appender.getLogMessages();
-        assertTrue(logMessages.contains("This is an info log message."));
+        assertTrue(logMessages.stream().anyMatch(s -> s.startsWith("This is an info log message at")));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class LoggingDemoTest {
         LoggingDemo.main(null);
 
         List<String> logMessages = appender.getLogMessages();
-        assertFalse(logMessages.contains("This is an info log message."));
+        assertFalse(logMessages.stream().anyMatch(s -> s.startsWith("This is an info log message at")));
     }
 
     @Test

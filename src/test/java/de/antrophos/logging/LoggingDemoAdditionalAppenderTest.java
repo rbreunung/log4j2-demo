@@ -48,7 +48,7 @@ public class LoggingDemoAdditionalAppenderTest {
         LoggingDemo.main(null);
 
         List<String> logMessages = appender1.getLogMessages();
-        assertTrue(logMessages.contains("This is an info log message."));
+        assertTrue(logMessages.stream().anyMatch(s -> s.startsWith("This is an info log message at")));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class LoggingDemoAdditionalAppenderTest {
         LoggingDemo.main(null);
 
         List<String> logMessages = appender2.getLogMessages();
-        assertTrue(logMessages.contains("This is an info log message."));
+        assertTrue(logMessages.stream().anyMatch(s -> s.startsWith("This is an info log message at")));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class LoggingDemoAdditionalAppenderTest {
         LoggingDemo.main(null);
 
         List<String> logMessages = appender1.getLogMessages();
-        assertFalse(logMessages.contains("This is an info log message."));
+        assertFalse(logMessages.stream().anyMatch(s -> s.startsWith("This is an info log message at")));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class LoggingDemoAdditionalAppenderTest {
         LoggingDemo.main(null);
 
         List<String> logMessages = appender2.getLogMessages();
-        assertFalse(logMessages.contains("This is an info log message."));
+        assertFalse(logMessages.stream().anyMatch(s -> s.startsWith("This is an info log message at")));
     }
 
     @Test
