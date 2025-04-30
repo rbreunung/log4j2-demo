@@ -19,6 +19,12 @@ mvn clean compile exec:java
 mvn test
 ```
 
+## Splunk Setup
+
+```bash
+docker run -d -p 8000:8000 -p 8088:8088 -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_PASSWORD=<password>" --name splunk -v splunk-var:/opt/splunk/var -v splunk-etc:/opt/splunk/etc splunk/splunk:9.1.0.2
+```
+
 ## Lessons Learned
 
 - old logger context must be closed before new one is created when [configuring by code](./src/test/java/de/antrophos/logging/LoggingConfigurationTest.java)
